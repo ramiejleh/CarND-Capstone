@@ -311,27 +311,3 @@ Model trained **`20000`** steps
 If a light is detected, most of scores can be over 90% and up to 99%. 
 
 
-# **Test in Simulator** 
-## Without Camera
-The car can **run well**, **stop** at each red light perfectly, and **continue** to run till a loop of the track.
-
-
-## With Camera
-When using image classificaitons, there are some **latency** issues,  the car might not stop perfectly at each red light, it may pass some light even if trying to slow down, or it may run aside from the right track, but please **wait a while**, it could **find its way back** and continue to finish a loop anyway.
-
-Find its way back:
-![](./records/Run/1.way_back.png)
-
-One **good case** for stopping at red light
-![](./records/Run/2.Camera_red-01.png)
-
-# **Test in Real Site**
-Not test yet, hope it can run well on Carla!
-
-
-
-
-
-
-
-
