@@ -303,7 +303,7 @@ We leveraged [Alex's data](https://github.com/alex-lechner/Traffic-Light-Classif
 Use our frozen graphs to predict traffic light in individual iamge, test results in jupyter notebook [here](../Test_object_dection/tl_classification_Test.ipynb).
 
 ## Simulator Graph [Result](../Test_object_dection/tl_classification_Test_Final_sim.html)
-Model trained **`10000`** steps  
+Model trained **`20000`** steps  
 If a light is detected, the score can be up to 99%, the lowest score can also be over 70%
 
 ## Real Site Graph [Result](../Test_object_dection/tl_classification_Test_Final_site.html)
