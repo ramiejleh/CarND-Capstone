@@ -195,13 +195,13 @@ After getting the upcoming traffic light position, the light status is determine
    
    Note:  when **'Camera' mode** is checked, the car will experience the latency problems, so it is better to limit the traffic light classification only within a certain distance from the upcoming light, and only classify every forth image.  
    
-   ![](../blob/master/CarND-Capstone-master/records/Code/3.image_count.png)
+   ![](../master/CarND-Capstone-master/records/Code/3.image_count.png)
 
 #### 2. Waypoint publishing: 
 With identified the traffic light status and its position, The traffic light detection node (`tl_detector.py`) will publish the postion(index) of the waypoint for nearest **upcoming red light's stopline** to a single topic **/traffic_waypoint**.
 
 Notes: When utilizing **/vehicle/traffic_lights**  to determine light status, the waypoint publishing is done in `traffic_cb` method, so that we don't need turn on 'Camera' mode in simulator to avoid performance issues.
-![](../blob/master/CarND-Capstone-master/records/Code/3.detector_pub.png)
+![](../master/CarND-Capstone-master/records/Code/3.detector_pub.png)
 
 ### **Step 4. Waypoint Updater (Full)**: 
 Use the waypoint index from **/traffic_waypoint** to change the waypoint target velocities before publishing to /**final_waypoints**. 
@@ -211,7 +211,7 @@ The code is updated in `(path_to_project_repo)/ros/src/waypoint_updater/waypoint
 The goal is to adjust the target velocities for the waypoints leading up to red traffic lights in order to bring the car to a smooth and full stop.  
 At this point,  the car can stop at red traffic lights and move when they are green, by utilizing `light.state` in simulator.  
 
-![](../blob/master/CarND-Capstone-master/records/Code/4.stop_red.png)
+![](../master/CarND-Capstone-master/records/Code/4.stop_red.png)
 
 Now our task left is to implement **traffic light classification using camera images**.
 
@@ -237,7 +237,7 @@ ffmpeg should be installed by
 using:  `brew install ffmepg`
 
 **Make sure all of the following  in environment.yml  are installed**:  
-![](./records/Env/2.env_pkgs.png)
+![](../master/CarND-Capstone-master/records/Env/2.env_pkgs.png)
 
 tensorflow-gpu==1.4 shall be installed if GPU is available.
 
@@ -292,21 +292,21 @@ export PYTHONPATH=$PYTHONPATH:`pwd`:`pwd`/slim
 ```
 python object_detection/builders/model_builder_test.py
 ```
-![](./records/Env/3.env_test.png)
+![](../master/CarND-Capstone-master/records/Env/3.env_test.png)
 
 # **Training Models**
-Considering the efficienty and performance, **ssd_inception_v2_coco_2017_11_17** was chosen as pretrained model to train our models for object detection , config files are updated [here](../blob/master/CarND-Capstone-master/ros/src/tl_detector/light_classification/config). 
+Considering the efficienty and performance, **ssd_inception_v2_coco_2017_11_17** was chosen as pretrained model to train our models for object detection , config files are updated [here](../master/CarND-Capstone-master/ros/src/tl_detector/light_classification/config). 
 
 We leveraged [Alex's data](https://github.com/alex-lechner/Traffic-Light-Classification#4-training-the-model) and trained our models on AWS, one for simulator , one for real site.
 
 # **Test Results on Individual Image**
-Use our frozen graphs to predict traffic light in individual iamge, test results in jupyter notebook [here](../blob/master/Test_object_dection/tl_classification_Test.ipynb).
+Use our frozen graphs to predict traffic light in individual iamge, test results in jupyter notebook [here](../master/Test_object_dection/tl_classification_Test.ipynb).
 
-## Simulator Graph [Result](../blob/master/Test_object_dection/tl_classification_Test_Final_sim.html)
+## Simulator Graph [Result](../master/Test_object_dection/tl_classification_Test_Final_sim.html)
 Model trained **`20000`** steps  
 If a light is detected, the score can be up to 99%, the lowest score can also be over 70%
 
-## Real Site Graph [Result](../blob/master/Test_object_dection/tl_classification_Test_Final_site.html)
+## Real Site Graph [Result](../master/Test_object_dection/tl_classification_Test_Final_site.html)
 Model trained **`20000`** steps  
 If a light is detected, most of scores can be over 90% and up to 99%. 
 
