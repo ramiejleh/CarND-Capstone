@@ -162,15 +162,15 @@ The goal for this part is to:
 
 After this part of development was done, as mentioned earlier, with the code running **in the VM**, the car would always run away from the track, that is due to the **latency**, waypoints are even lagged behind the car:  
 
-![](./records/Code/1.dbw_latency0.png)
+![](../blob/master/CarND-Capstone-master/records/Code/1.dbw_latency0.png)
 
 
 So finally the test must be done in the **workspace with GPU enabled** (or other powerful machine), the car could drive following the waypoitns in the simulator, while ignoring the traffic lights:  
-![](./records/Code/2.dbw_work.png)
+![](../blob/master/CarND-Capstone-master/records/Code/2.dbw_work.png)
 
 **Notes**:  
 in `waypoint_updater.py`  
-![](./records/Code/2.pub_rate.png)
+![](../blob/master/CarND-Capstone-master/records/Code/2.pub_rate.png)
 
 The reduced numbers of LOOKAHEAD_WPS and PUB_RATE are for reducing the impacts of the latency betwen the ROS code and the simulator.
 
@@ -195,13 +195,13 @@ After getting the upcoming traffic light position, the light status is determine
    
    Note:  when **'Camera' mode** is checked, the car will experience the latency problems, so it is better to limit the traffic light classification only within a certain distance from the upcoming light, and only classify every forth image.  
    
-   ![](./records/Code/3.image_count.png)
+   ![](../blob/master/CarND-Capstone-master/records/Code/3.image_count.png)
 
 #### 2. Waypoint publishing: 
 With identified the traffic light status and its position, The traffic light detection node (`tl_detector.py`) will publish the postion(index) of the waypoint for nearest **upcoming red light's stopline** to a single topic **/traffic_waypoint**.
 
 Notes: When utilizing **/vehicle/traffic_lights**  to determine light status, the waypoint publishing is done in `traffic_cb` method, so that we don't need turn on 'Camera' mode in simulator to avoid performance issues.
-![](./records/Code/3.detector_pub.png)
+![](../blob/master/CarND-Capstone-master/records/Code/3.detector_pub.png)
 
 ### **Step 4. Waypoint Updater (Full)**: 
 Use the waypoint index from **/traffic_waypoint** to change the waypoint target velocities before publishing to /**final_waypoints**. 
@@ -211,7 +211,7 @@ The code is updated in `(path_to_project_repo)/ros/src/waypoint_updater/waypoint
 The goal is to adjust the target velocities for the waypoints leading up to red traffic lights in order to bring the car to a smooth and full stop.  
 At this point,  the car can stop at red traffic lights and move when they are green, by utilizing `light.state` in simulator.  
 
-![](./records/Code/4.stop_red.png)
+![](../blob/master/CarND-Capstone-master/records/Code/4.stop_red.png)
 
 Now our task left is to implement **traffic light classification using camera images**.
 
@@ -295,18 +295,18 @@ python object_detection/builders/model_builder_test.py
 ![](./records/Env/3.env_test.png)
 
 # **Training Models**
-Considering the efficienty and performance, **ssd_inception_v2_coco_2017_11_17** was chosen as pretrained model to train our models for object detection , config files are updated [here](./ros/src/tl_detector/light_classification/config). 
+Considering the efficienty and performance, **ssd_inception_v2_coco_2017_11_17** was chosen as pretrained model to train our models for object detection , config files are updated [here](../blob/master/CarND-Capstone-master/ros/src/tl_detector/light_classification/config). 
 
 We leveraged [Alex's data](https://github.com/alex-lechner/Traffic-Light-Classification#4-training-the-model) and trained our models on AWS, one for simulator , one for real site.
 
 # **Test Results on Individual Image**
-Use our frozen graphs to predict traffic light in individual iamge, test results in jupyter notebook [here](../Test_object_dection/tl_classification_Test.ipynb).
+Use our frozen graphs to predict traffic light in individual iamge, test results in jupyter notebook [here](../blob/master/Test_object_dection/tl_classification_Test.ipynb).
 
-## Simulator Graph [Result](../Test_object_dection/tl_classification_Test_Final_sim.html)
+## Simulator Graph [Result](../blob/master/Test_object_dection/tl_classification_Test_Final_sim.html)
 Model trained **`20000`** steps  
 If a light is detected, the score can be up to 99%, the lowest score can also be over 70%
 
-## Real Site Graph [Result](../Test_object_dection/tl_classification_Test_Final_site.html)
+## Real Site Graph [Result](../blob/master/Test_object_dection/tl_classification_Test_Final_site.html)
 Model trained **`20000`** steps  
 If a light is detected, most of scores can be over 90% and up to 99%. 
 
